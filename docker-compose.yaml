@@ -1,0 +1,42 @@
+version: '3.0'
+
+networks:
+  web-network:
+    driver: bridge
+
+services:
+  nginx:
+    build:
+      context: docker/nginx
+    volumes:
+      - ./app:/var/www
+    tty: true
+    ports:
+      - "80:80"
+    networks:
+      - web-network
+
+  php-fpm:
+    build:
+      context: docker/php-fpm
+    tty: true
+    networks:
+      - web-network
+    volumes:
+      - ./app:/var/www
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      PHP_IDE_CONFIG: serverName=Docker
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - 'MYSQL_ROOT_PASSWORD=root'
+      - 'MYSQL_DATABASE=app'
+      - 'MYSQL_USER=admin'
+      - "MYSQL_PASSWORD=admin"
+    ports:
+      - "3337:3306"
+    networks:
+      - web-network
