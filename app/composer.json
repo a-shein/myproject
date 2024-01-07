@@ -1,0 +1,18 @@
+{
+    "name": "alexander.shein/myproject",
+    "authors": [
+        {
+            "name": "a.shein",
+            "email": "alexander.shein1993@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "ext-readline": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Component\\": "src/Component"
+        }
+    }
+}
