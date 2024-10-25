@@ -6,4 +6,6 @@ namespace Component\Graph;
 class Test
 {
     private string $name;
+
+    private int $number;
 }
